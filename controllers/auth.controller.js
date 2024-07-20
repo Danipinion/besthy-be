@@ -23,7 +23,6 @@ export const login = async (req, res) => {
       id: user.id,
       name: user.name,
       email: user.email,
-      psikotes: user.psikotes,
     });
   } catch (error) {
     res.status(500).json({ msg: error.message });
@@ -41,6 +40,15 @@ export const Me = async (req, res) => {
         name: true,
         email: true,
         psikotes: true,
+        profile: {
+          select: {
+            telp: true,
+            jenisKelamin: true,
+            birthdate: true,
+            jenisKhodam: true,
+            kepribadian: true,
+          },
+        },
       },
     });
     if (!user) return res.status(404).json({ msg: "User not found" });

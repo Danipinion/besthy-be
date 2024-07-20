@@ -10,6 +10,7 @@ export const getUsers = async (req, res) => {
         name: true,
         email: true,
         psikotes: true,
+        profile: true,
       },
     });
     res.status(200).json(response);
@@ -38,21 +39,33 @@ export const getUserById = async (req, res) => {
 
 export const createUser = async (req, res) => {
   const { name, email, password, confPassword } = req.body;
-  if (password !== confPassword)
+  if (password !== confPassword) {
     return res
       .status(400)
       .json({ msg: "Password and confirm password do not match" });
+  }
 
   const salt = await bcrypt.genSalt();
   const hashPassword = await bcrypt.hash(password, salt);
   try {
-    await prisma.users.create({
+    const user = await prisma.users.create({
       data: {
         name,
         email,
         password: hashPassword,
       },
     });
+
+    await prisma.profile.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+      },
+    });
+
     res.status(201).json({ msg: "User created successfully" });
   } catch (error) {
     res.status(400).json({ msg: error.message });
@@ -110,6 +123,30 @@ export const deleteUser = async (req, res) => {
       },
     });
     res.status(200).json({ msg: "User deleted successfully" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};
+
+// PROOFILE
+export const updateProfile = async (req, res) => {
+  const { id } = req.params;
+  const { telp, jenisKelamin, birthdate, jenisKhodam, kepribadian } = req.body;
+
+  try {
+    await prisma.profile.update({
+      where: {
+        userId: id,
+      },
+      data: {
+        telp,
+        jenisKelamin,
+        birthdate,
+        jenisKhodam,
+        kepribadian,
+      },
+    });
+    res.status(200).json({ msg: "Profile updated successfully" });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }

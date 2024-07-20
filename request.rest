@@ -2,7 +2,7 @@
 GET http://localhost:3002/users
 
 ### GET USER BY ID
-GET http://localhost:3002/users/1
+GET http://localhost:3002/users/2
 
 ### CREATE USER
 POST http://localhost:3002/users
@@ -16,11 +16,11 @@ Content-Type: application/json
 }
 
 ### UPDATE USER
-PATCH  http://localhost:3002/users/1
+PATCH  http://localhost:3002/users/clytvyhk70000gz8q316i17th
 Content-Type: application/json
 
 {
-    "name": "test1",
+    "name": "test1up",
     "email": "test1@g.com",
     "password": "test1",
     "confPassword": "test1"
@@ -43,4 +43,15 @@ GET http://localhost:3002/auth/me
 
 ### LOGOUT
 DELETE  http://localhost:3002/auth/logout
+    
+### UPDATE PROFILE
+PATCH  http://localhost:3002/users/profile/clytux2it0000b0ayvi59xof2
+Content-Type: application/json
 
+{
+    "telp": "081234567890",
+    "jenisKelamin": "LAKI_LAKI",
+    "birthdate": "2000-01-01",
+    "jenisKhodam": "JOHN",
+    "kepribadian": "SINGUIS"
+}
