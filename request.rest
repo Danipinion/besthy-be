@@ -9,8 +9,8 @@ POST http://localhost:3002/users
 Content-Type: application/json
 
 {
-    "name": "test1",
-    "email": "test1@g.com",
+    "name": "test2",
+    "email": "test2@g.com",
     "password": "test1",
     "confPassword": "test1"
 }
@@ -34,7 +34,7 @@ POST http://localhost:3002/auth/login
 Content-Type: application/json
 
 {
-    "email": "test1@g.com",
+    "email": "test2@g.com",
     "password": "test1"
 }
 
@@ -54,4 +54,15 @@ Content-Type: application/json
     "birthdate": "2000-01-01",
     "jenisKhodam": "JOHN",
     "kepribadian": "SINGUIS"
+}
+
+### Get Message
+GET http://localhost:3002/message
+
+### Create Message
+POST http://localhost:3002/message
+Content-Type: application/json
+
+{
+    "text": "test from aloha"
 }
