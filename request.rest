@@ -9,10 +9,10 @@ POST http://localhost:3002/users
 Content-Type: application/json
 
 {
-    "name": "test2",
-    "email": "test2@g.com",
-    "password": "test1",
-    "confPassword": "test1"
+    "name": "test1",
+    "email": "1",
+    "password": "1",
+    "confPassword": "1"
 }
 
 ### UPDATE USER
@@ -34,8 +34,8 @@ POST http://localhost:3002/auth/login
 Content-Type: application/json
 
 {
-    "email": "test2@g.com",
-    "password": "test1"
+    "email": "1",
+    "password": "1"
 }
 
 ### ME

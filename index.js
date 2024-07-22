@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import session from "express-session";
-import path from "path";
+import http from "http";
 
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
+import { Server } from "socket.io";
 
 dotenv.config();
 const app = express();
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5174",
+    origin: "http://localhost:5173",
   })
 );
 app.use(
@@ -30,6 +31,13 @@ app.use("/users", userRoute);
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
 
-app.listen(process.env.APP_PORT, () => {
-  console.log(`App running on port ${process.env.APP_PORT}`);
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5174",
+  },
+});
+
+server.listen(process.env.APP_PORT, () => {
+  console.log(`Server running on port ${process.env.APP_PORT}`);
 });
