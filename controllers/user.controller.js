@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
+import { khodamList } from "../constants/Khodam.js";
 const prisma = new PrismaClient();
 
 export const getUsers = async (req, res) => {
@@ -55,9 +56,16 @@ export const createUser = async (req, res) => {
         password: hashPassword,
       },
     });
+    function getRandomKhodam(khodamArray) {
+      const randomIndex = Math.floor(Math.random() * khodamArray.length);
+      return khodamArray[randomIndex];
+    }
 
+    // Contoh penggunaan:
+    const randomKhodam = getRandomKhodam(khodamList);
     await prisma.profile.create({
       data: {
+        jenisKhodam: randomKhodam,
         user: {
           connect: {
             id: user.id,
@@ -134,16 +142,32 @@ export const updateProfile = async (req, res) => {
   const { telp, jenisKelamin, birthdate, jenisKhodam, kepribadian } = req.body;
 
   try {
+    const response = await prisma.users.findUnique({
+      where: {
+        id,
+      },
+      select: {
+        profile: {
+          select: {
+            telp: true,
+            jenisKelamin: true,
+            birthdate: true,
+            jenisKhodam: true,
+            kepribadian: true,
+          },
+        },
+      },
+    });
     await prisma.profile.update({
       where: {
         userId: id,
       },
       data: {
-        telp,
-        jenisKelamin,
-        birthdate,
-        jenisKhodam,
-        kepribadian,
+        telp: telp || response.profile.telp,
+        jenisKelamin: jenisKelamin || response.profile.jenisKelamin,
+        birthdate: birthdate || response.profile.birthdate,
+        jenisKhodam: jenisKhodam || response.profile.jenisKhodam,
+        kepribadian: kepribadian || response.profile.kepribadian,
       },
     });
     res.status(200).json({ msg: "Profile updated successfully" });

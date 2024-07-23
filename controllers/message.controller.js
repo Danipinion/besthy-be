@@ -52,9 +52,6 @@ export const createMessage = async (req, res) => {
       },
     });
 
-    const io = req.app.get("io");
-    io.emit("newMessage", message);
-
     res.status(201).json({ msg: "Message created successfully" });
   } catch (error) {
     console.error("Error creating message:", error);
