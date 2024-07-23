@@ -23,17 +23,16 @@ export const getMessages = async (req, res) => {
 
 export const createMessage = async (req, res) => {
   const { text } = req.body;
-  const userId = req.session.userId;
-
+  const { id } = req.params;
   // Check if userId is set and not null
-  if (!userId) {
+  if (!id) {
     return res.status(400).json({ msg: "User not authenticated" });
   }
 
   try {
     // Check if user exists in the database
     const userExists = await prisma.users.findUnique({
-      where: { id: userId },
+      where: { id: id },
     });
 
     if (!userExists) {
@@ -46,7 +45,7 @@ export const createMessage = async (req, res) => {
         text,
         user: {
           connect: {
-            id: userId,
+            id: id,
           },
         },
       },

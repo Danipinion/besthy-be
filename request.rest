@@ -60,7 +60,7 @@ Content-Type: application/json
 GET http://localhost:3002/message
 
 ### Create Message
-POST http://localhost:3002/message
+POST http://localhost:3002/message/clyxy4h4w0001llyq70qo26bu
 Content-Type: application/json
 
 {
