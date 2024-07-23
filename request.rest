@@ -10,9 +10,9 @@ Content-Type: application/json
 
 {
     "name": "test1",
-    "email": "1",
-    "password": "1",
-    "confPassword": "1"
+    "email": "2",
+    "password": "2",
+    "confPassword": "2"
 }
 
 ### UPDATE USER
@@ -39,7 +39,7 @@ Content-Type: application/json
 }
 
 ### ME
-GET http://localhost:3002/auth/me
+GET http://localhost:3002/auth/me/clyx1or800000t16o0asl74ri
 
 ### LOGOUT
 DELETE  http://localhost:3002/auth/logout

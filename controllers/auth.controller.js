@@ -30,10 +30,11 @@ export const login = async (req, res) => {
 };
 
 export const Me = async (req, res) => {
+  const userId = req.params.id;
   try {
     const user = await prisma.users.findUnique({
       where: {
-        id: req.session.userId,
+        id: userId,
       },
       select: {
         id: true,
