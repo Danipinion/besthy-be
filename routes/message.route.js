@@ -6,7 +6,7 @@ import {
 import { verifyUser } from "../middleware/AuthUser.js";
 const router = Router();
 
-router.get("/", verifyUser, getMessages);
-router.post("/", verifyUser, createMessage);
+router.get("/", getMessages);
+router.post("/", createMessage);
 
 export default router;

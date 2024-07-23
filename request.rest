@@ -30,7 +30,7 @@ Content-Type: application/json
 DELETE http://localhost:3002/users/1
 
 ### LOGIN
-POST http://localhost:3002/auth/login
+POST https://besthy-be.vercel.app/auth/login
 Content-Type: application/json
 
 {
