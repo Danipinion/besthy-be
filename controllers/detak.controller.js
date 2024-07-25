@@ -10,6 +10,10 @@ export const getDetak = async (req, res) => {
       select: {
         id: true,
         detak: true,
+        createdAt: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     });
     res.status(200).json(detak);
@@ -30,7 +34,20 @@ export const createDetak = async (req, res) => {
       return res.status(404).json({ msg: "User not found" });
     }
 
-    // Create the DetakJantung record
+    // Check the number of existing records for the user
+    const existingRecords = await prisma.detakJantung.findMany({
+      where: { userId },
+      orderBy: { createdAt: "asc" },
+    });
+
+    if (existingRecords.length >= 5) {
+      // Delete the oldest record
+      await prisma.detakJantung.delete({
+        where: { id: existingRecords[0].id },
+      });
+    }
+
+    // Create the new DetakJantung record
     const newDetak = await prisma.detakJantung.create({
       data: {
         detak,

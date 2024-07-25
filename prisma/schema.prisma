@@ -44,8 +44,9 @@ model Message {
 }
 
 model DetakJantung {
-  id     String @id @default(cuid())
-  detak  Int
-  user   Users  @relation(fields: [userId], references: [id])
-  userId String
+  id        String    @id @default(cuid())
+  detak     Int
+  createdAt DateTime? @default(now())
+  user      Users     @relation(fields: [userId], references: [id])
+  userId    String
 }

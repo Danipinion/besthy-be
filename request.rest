@@ -68,14 +68,14 @@ Content-Type: application/json
 }
 
 ### GET Detak
-GET http://localhost:3002/detak/clz17gwng0001obd71h49t35x
+GET http://localhost:3002/detak/clz195fts0000prvu1vk73scx
 
 ### CREATE Detak
 POST http://localhost:3002/detak
 Content-Type: application/json
 
 {
-  "detak": 80,
-  "userId": "clz17gwng0001obd71h49t35x"
+  "detak": 100,
+  "userId": "clz195fts0000prvu1vk73scx"
 }
 
