@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://besthy-be.vercel.app",
+    origin: "https://besthy-fe.vercel.app",
   })
 );
 app.use(
@@ -36,7 +36,7 @@ app.use("/detak", detakRoute);
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://besthy-be.vercel.app",
+    origin: "https://besthy-fe.vercel.app",
   },
 });
 
