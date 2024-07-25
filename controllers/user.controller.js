@@ -32,6 +32,7 @@ export const getUserById = async (req, res) => {
         name: true,
         email: true,
         psikotes: true,
+        detakJantung: true,
       },
     });
     res.status(200).json(response);

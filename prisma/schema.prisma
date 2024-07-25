@@ -9,13 +9,14 @@ datasource db {
 }
 
 model Users {
-  id       String    @id @default(cuid())
-  name     String
-  email    String    @unique
-  password String
-  psikotes Boolean   @default(false)
-  profile  Profile?
-  messages Message[]
+  id           String         @id @default(cuid())
+  name         String
+  email        String         @unique
+  password     String
+  psikotes     Boolean        @default(false)
+  profile      Profile?
+  messages     Message[]
+  DetakJantung DetakJantung[]
 }
 
 model Profile {
@@ -39,5 +40,12 @@ model Message {
   text   String
   date   DateTime @default(now())
   user   Users    @relation(fields: [userId], references: [id])
+  userId String
+}
+
+model DetakJantung {
+  id     String @id @default(cuid())
+  detak  Int
+  user   Users  @relation(fields: [userId], references: [id])
   userId String
 }

@@ -7,6 +7,7 @@ import http from "http";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
 import messageRoute from "./routes/message.route.js";
+import detakRoute from "./routes/detak.route.js";
 import { Server } from "socket.io";
 
 dotenv.config();
@@ -15,7 +16,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "https://besthy-fe.vercel.app",
+    origin: "http://localhost:5173",
   })
 );
 app.use(
@@ -30,11 +31,12 @@ app.use(
 app.use("/users", userRoute);
 app.use("/auth", authRoute);
 app.use("/message", messageRoute);
+app.use("/detak", detakRoute);
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://besthy-fe.vercel.app",
+    origin: "http://localhost:5173",
   },
 });
 
